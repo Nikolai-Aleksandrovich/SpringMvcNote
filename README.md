@@ -27,8 +27,8 @@ this is a blog for spring mvc
 ```
 
 ###一、如何新建spring mvc？     
-####1、新建一个maven Module ， springmvc-02-hello ， 添加web的支持     
-####2、确定导入了SpringMVC 的依赖！   
+1.新建一个maven Module ， springmvc-02-hello ， 添加web的支持     
+2.确定导入了SpringMVC 的依赖！   
 ```
     <dependencies>
        <dependency>
@@ -71,7 +71,7 @@ this is a blog for spring mvc
 ```
     
     
-####3、配置web.xml  ， 注册DispatcherServlet
+3.配置web.xml  ， 注册DispatcherServlet
 ```
    <?xml version="1.0" encoding="UTF-8"?>
     <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
@@ -101,7 +101,7 @@ this is a blog for spring mvc
     
     </web-app>
 ```
-####4、编写SpringMVC 的 配置文件！名称：springmvc-servlet.xml  : [servletname]-servlet.xml
+4.编写SpringMVC 的 配置文件！名称：springmvc-servlet.xml  : [servletname]-servlet.xml
     说明，这里的名称要求是按照官方来的
 ```    
     <?xml version="1.0" encoding="UTF-8"?>
@@ -112,15 +112,15 @@ this is a blog for spring mvc
     
     </beans>
 ```
-####5、添加 处理映射器 到 springmvc=servlet.xml的容器中 
+5.添加 处理映射器 到 springmvc=servlet.xml的容器中 
 ``` 
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 ```
-####6、添加 处理器适配器 到 springmvc=servlet.xml的容器中   
+6.添加 处理器适配器 到 springmvc=servlet.xml的容器中   
 ```
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
 ```
-####7、添加 视图解析器 到 springmvc=servlet.xml的容器中   
+7.添加 视图解析器 到 springmvc=servlet.xml的容器中   
     //注意这里的前缀和后缀需要修改
 ```   
     <!--视图解析器:DispatcherServlet给他的ModelAndView-->
@@ -131,7 +131,7 @@ this is a blog for spring mvc
        <property name="suffix" value=".jsp"/>
     </bean>
 ```
-####8、编写我们要操作业务Controller ，要么实现Controller接口，要么增加注解；需要返回一个ModelAndView，装数据，封视图；   
+8.编写我们要操作业务Controller ，要么实现Controller接口，要么增加注解；需要返回一个ModelAndView，装数据，封视图；   
 
     我在src/main/java/com/huang/controller/HelloController下增加一个业务Controller：  
 ```
@@ -160,12 +160,12 @@ this is a blog for spring mvc
     }
 ``` 
     
-####9、将自己的类交给SpringIOC容器，注册bean   
+9.将自己的类交给SpringIOC容器，注册bean   
 ```
     <!--Handler-->
     <bean id="/hello" class="com.kuang.controller.HelloController"/>
 ```
-####10、写要跳转的jsp页面，显示ModelandView存放的数据，以及我们的正常页面； 
+10.写要跳转的jsp页面，显示ModelandView存放的数据，以及我们的正常页面； 
 ```   
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <html>
@@ -177,7 +177,7 @@ this is a blog for spring mvc
     </body>
     </html>
 ```   
-####11、配置Tomcat 启动测试！   
+11.配置Tomcat 启动测试！   
 
     在http://localhost:8080/hello 测试   
     
