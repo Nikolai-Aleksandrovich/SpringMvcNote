@@ -1,5 +1,5 @@
 # SpringMvcNote
-this is a blog for spring mvc
+this is a blog for spring mvc  
 ###写在开头：maven存在资源过滤的问题，如何改正？
    在pom.xml文件中使用如下配置将其配置完善  
    可以将java下的*.properties,*.xml文件过滤   
@@ -163,4 +163,4 @@ this is a blog for spring mvc
     3.重启Tomcat    
 ***
 ###二、如何用注解实现呢？
-1.新建一个module，springmvc-03-hello-annotation 。添加web支持！
+####1.新建一个module，springmvc-03-hello-annotation 。添加web支持！
