@@ -72,10 +72,10 @@ this is a conclusion for spring mvc controller
     
     }
 ```        
-   Spring可以使用扫描机制来找到应用程序中所有基于注解的控制器类
+   Spring可以使用扫描机制来找到应用程序中所有基于注解的控制器类  
 ###简要分析@RequestMapping  
-   @RequestMapping注解用于映射url到控制器类或一个特定的处理程序方法。可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。
-   1.举例一：RequestMapping用于方法上： 
+   @RequestMapping注解用于映射url到控制器类或一个特定的处理程序方法。可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。  
+   1.举例一：RequestMapping用于方法上：   
    此时的访问路径为： http://localhost:8080/ h1
    ```
         @Controller
@@ -87,6 +87,7 @@ this is a conclusion for spring mvc controller
         }
 ```  
    2.举例二：RequestMapping同时用于类与方法上：  
+     
    此时的访问路径为：http://localhost:8080/ admin /h1，需要先指定类的路径再指定方法的路径
    ```
         @Controller
