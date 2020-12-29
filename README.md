@@ -1,7 +1,8 @@
 # SpringMvcNote
 this is a blog for spring mvc
-###写在开头：maven存在资源过滤的问题，如何改正？在pom.xml文件中使用如下配置将其配置完善  
-   可以将java下的*.properties,*.xml文件过滤
+###写在开头：maven存在资源过滤的问题，如何改正？
+   在pom.xml文件中使用如下配置将其配置完善  
+   可以将java下的*.properties,*.xml文件过滤   
 ``` 
     <build>
        <resources>
@@ -25,10 +26,10 @@ this is a blog for spring mvc
     </build>
 ```
 
-###一、如何新建spring mvc？
-####1、新建一个maven Module ， springmvc-02-hello ， 添加web的支持
-####2、确定导入了SpringMVC 的依赖！
-'''
+###一、如何新建spring mvc？     
+####1、新建一个maven Module ， springmvc-02-hello ， 添加web的支持     
+####2、确定导入了SpringMVC 的依赖！   
+```
     <dependencies>
        <dependency>
            <groupId>junit</groupId>
@@ -67,7 +68,7 @@ this is a blog for spring mvc
           <version>2.2</version>
        </dependency>
     </dependencies>
-'''
+```
     
     
 ####3、配置web.xml  ， 注册DispatcherServlet
@@ -130,9 +131,11 @@ this is a blog for spring mvc
        <property name="suffix" value=".jsp"/>
     </bean>
 ```
-####8、编写我们要操作业务Controller ，要么实现Controller接口，要么增加注解；需要返回一个ModelAndView，装数据，封视图；
-    我在src/main/java/com/huang/controller/HelloController下增加一个业务Controller：
-####9、将自己的类交给SpringIOC容器，注册bean
+####8、编写我们要操作业务Controller ，要么实现Controller接口，要么增加注解；需要返回一个ModelAndView，装数据，封视图；   
+
+    我在src/main/java/com/huang/controller/HelloController下增加一个业务Controller：   
+    
+####9、将自己的类交给SpringIOC容器，注册bean   
 ```
     <!--Handler-->
     <bean id="/hello" class="com.kuang.controller.HelloController"/>
@@ -149,12 +152,15 @@ this is a blog for spring mvc
     </body>
     </html>
 ```   
-####11、配置Tomcat 启动测试！
-    在http://localhost:8080/hello 测试
-###心得：当出现问题时不要慌，检查三个事情是不是没有做好：
-    1、缺少jar包
-    2、在IDEA项目发布添加lib依赖
-    3、重启Tomcat    
+####11、配置Tomcat 启动测试！   
+
+    在http://localhost:8080/hello 测试   
+    
+###心得：当出现问题时不要慌，检查三个事情是不是没有做好：   
+
+    1.缺少jar包
+    2.在IDEA项目发布添加lib依赖
+    3.重启Tomcat    
 ***
 ###二、如何用注解实现呢？
-####1、新建一个module，springmvc-03-hello-annotation 。添加web支持！
+1.新建一个module，springmvc-03-hello-annotation 。添加web支持！
