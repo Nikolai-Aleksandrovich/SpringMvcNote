@@ -133,7 +133,7 @@ this is a blog for spring mvc
 ```
 8.编写我们要操作业务Controller ，要么实现Controller接口，要么增加注解；需要返回一个ModelAndView，装数据，封视图；   
 
-    我在src/main/java/com/huang/controller/HelloController下增加一个业务Controller：  
+   我在src/main/java/com/huang/controller/HelloController下增加一个业务Controller：  
 ```
     package com.huang.controller;
     
@@ -179,7 +179,7 @@ this is a blog for spring mvc
 ```   
 11.配置Tomcat 启动测试！   
 
-    在http://localhost:8080/hello 测试   
+   在http://localhost:8080/hello 测试   
     
 ###心得：当出现问题时不要慌，检查三个事情是不是没有做好：   
 
@@ -286,7 +286,7 @@ this is a blog for spring mvc
     
     </beans>
 ```          
-    在视图解析器中我们把所有的视图都存放在/WEB-INF/目录下，这样可以保证视图安全，因为这个目录下的文件，客户端不能直接访问。  
+   在视图解析器中我们把所有的视图都存放在/WEB-INF/目录下，这样可以保证视图安全，因为这个目录下的文件，客户端不能直接访问。  
 6.创建Controller   
     编写一个Java控制类：com.huang.controller.HelloController
 ```   
