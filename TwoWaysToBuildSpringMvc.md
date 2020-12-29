@@ -26,9 +26,51 @@ this is a blog for spring mvc
     </build>
 ```
 
+###简要分析SpringMVC执行流程
+   
+   1.DispatcherServlet表示前置控制器，是整个SpringMVC的控制中心。用户发出请求，DispatcherServlet接收请求并拦截请求。
+   
+   我们假设请求的url为 : http://localhost:8080/SpringMVC/hello
+   
+   
+   如上url拆分成三部分：
+   
+   http://localhost:8080服务器域名
+   
+   SpringMVC部署在服务器上的web站点
+   
+   hello表示控制器
+   
+   通过分析，如上url表示为：请求位于服务器localhost:8080上的SpringMVC站点的hello控制器。
+   
+   2.HandlerMapping为处理器映射。DispatcherServlet调用HandlerMapping,HandlerMapping根据请求url查找Handler。
+   
+   3.HandlerExecution表示具体的Handler,其主要作用是根据url查找控制器，如上url被查找控制器为：hello。
+   
+   4.HandlerExecution将解析后的信息传递给DispatcherServlet,如解析控制器映射等。
+   
+   5.HandlerAdapter表示处理器适配器，其按照特定的规则去执行Handler。
+   
+   6.Handler让具体的Controller执行。
+   
+   7.Controller将具体的执行信息返回给HandlerAdapter,如ModelAndView。
+   
+   8.HandlerAdapter将视图逻辑名或模型传递给DispatcherServlet。
+   
+   9.DispatcherServlet调用视图解析器(ViewResolver)来解析HandlerAdapter传递的逻辑视图名。
+   
+   10.视图解析器将解析的逻辑视图名传给DispatcherServlet。
+   
+   11.DispatcherServlet根据视图解析器解析的视图结果，调用具体的视图。
+   
+   12.最终视图呈现给用户。  
+   
 ###一、如何新建spring mvc？     
 1.新建一个maven Module ， springmvc-02-hello ， 添加web的支持     
-2.确定导入了SpringMVC 的依赖！   
+2.确定导入了SpringMVC 的依赖！  
+    如何判断已经导入？
+    1.在maven的Dependencies中springframework：spring-webmvc存在
+    2.在ProjectStructure中的artifact的Output Layout中确认有lib 
 ```
     <dependencies>
        <dependency>
@@ -152,7 +194,7 @@ this is a blog for spring mvc
     
            //封装对象，放在ModelAndView中。Model
            mv.addObject("msg","HelloSpringMVC!");
-           //封装要跳转的视图，放在ModelAndView中
+           //封装要跳转的视图，放在ModelAndView中,步骤7中的前缀后缀吧hello自动拼接为/WEB-INF/jsp/hello.jsp
            mv.setViewName("hello"); //: /WEB-INF/jsp/hello.jsp
            return mv;
       }
