@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="dp.properties"/>
+    <typeAliases>
+        <package name="com.huang.pojo"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="com/huang/dao/BookMapper.xml"/>
+    </mappers>
+
+</configuration>
