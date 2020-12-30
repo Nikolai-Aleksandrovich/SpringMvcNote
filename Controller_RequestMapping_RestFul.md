@@ -103,17 +103,17 @@ this is a conclusion for spring mvc controller
 ###RestFul风格：是一个资源定位及资源操作的风格。    
 *资源：互联网所有的事物都可以被抽象为资源
 
-*资源操作：使用POST、DELETE、PUT、GET，使用不同方法对资源进行操作。
+*资源操作：使用POST、DELETE、PUT、GET，使用不同方法对资源进行操作。  
     *传统方式操作资源 ：  
-        * http://127.0.0.1/item/queryItem.action?id=1 查询,GET
-        * http://127.0.0.1/item/saveItem.action 新增,POST
-        * http://127.0.0.1/item/updateItem.action 更新,POST
-        * http://127.0.0.1/item/deleteItem.action?id=1 删除,GET或POST  
-    *RESTful方式操作资源 ： 可以通过不同的请求方式来实现不同的效果 
-        * http://127.0.0.1/item/1 查询,GET  
-        * http://127.0.0.1/item 新增,POST  
-        * http://127.0.0.1/item 更新,PUT  
-        * http://127.0.0.1/item/1 删除,DELETE    
+        * http://127.0.0.1/item/queryItem.action?id=1 查询,GET  
+        * http://127.0.0.1/item/saveItem.action 新增,POST  
+        * http://127.0.0.1/item/updateItem.action 更新,POST  
+        * http://127.0.0.1/item/deleteItem.action?id=1 删除,GET或POST    
+    *RESTful方式操作资源 ： 可以通过不同的请求方式来实现不同的效果   
+        * http://127.0.0.1/item/1 查询,GET    
+        * http://127.0.0.1/item 新增,POST    
+        * http://127.0.0.1/item 更新,PUT    
+        * http://127.0.0.1/item/1 删除,DELETE      
     1.示例一：不使用Restful风格的controller   
     *使用http://localhost:8080/add?a=1&b=2访问  
 ```  
@@ -156,11 +156,11 @@ this is a conclusion for spring mvc controller
     }
 ```       
 ###总结：
-    *url更简洁
-    *参数更方便，框架负责自动的类型转换
-    *也可以约束访问参数
-    *GetMapping是一个组合注解，意义为： @RequestMapping(method =RequestMethod.GET)
-    *也可以用@GetMapping，@PostMapping，@PutMapping，@DeleteMapping，@PatchMapping
+    *url更简洁  
+    *参数更方便，框架负责自动的类型转换  
+    *也可以约束访问参数  
+    *GetMapping是一个组合注解，意义为： @RequestMapping(method =RequestMethod.GET)  
+    *也可以用@GetMapping，@PostMapping，@PutMapping，@DeleteMapping，@PatchMapping  
                      
                      
                      
