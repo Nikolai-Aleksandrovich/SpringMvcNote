@@ -99,6 +99,76 @@ this is a conclusion for spring mvc controller
           }
         }
 
-```
+```  
+###RestFul风格：是一个资源定位及资源操作的风格。    
+*资源：互联网所有的事物都可以被抽象为资源
+
+*资源操作：使用POST、DELETE、PUT、GET，使用不同方法对资源进行操作。
+    *传统方式操作资源 ：  
+        * http://127.0.0.1/item/queryItem.action?id=1 查询,GET
+          
+        * http://127.0.0.1/item/saveItem.action 新增,POST
+          
+        * http://127.0.0.1/item/updateItem.action 更新,POST
+          
+        * http://127.0.0.1/item/deleteItem.action?id=1 删除,GET或POST  
+    *RESTful方式操作资源 ： 可以通过不同的请求方式来实现不同的效果 
+        * http://127.0.0.1/item/1 查询,GET  
+         
+        * http://127.0.0.1/item 新增,POST  
+         
+        * http://127.0.0.1/item 更新,PUT  
+         
+        * http://127.0.0.1/item/1 删除,DELETE    
+    1.示例一：不使用Restful风格的controller   
+    *使用http://localhost:8080/add?a=1&b=2访问  
+```  
+        @Controller
+        public class NoRESTfulController {
+            @RequestMapping("/add")
+            public String test(int a, int b, Model model){
+                int result = a+b;
+                model.addAttribute("arg","the answer is "+result);
+                return "test";
+        
+            }
+        } 
+
+```      
+    2.示例二：使用Restful风格的controller   
+    *使用http://localhost:8080/add/1/2访问  
+``` 
+    @Controller
+    public class RestFulController {
+    
+       //映射访问路径
+       @RequestMapping("/commit/{p1}/{p2}")
+       public String index(@PathVariable int p1, @PathVariable int p2, Model model){
+           
+           int result = p1+p2;
+           //Spring MVC会自动实例化一个Model对象用于向视图中传值
+           model.addAttribute("msg", "结果："+result);
+           //返回视图位置
+           return "test";
+           
+      }
+        //可以在RequestMapping设置method来分别处理GET POST PUT DELETE等请求
+        @RequestMapping(value = "/hello",method = {RequestMethod.GET})
+            public String index2(Model model){
+                model.addAttribute("msg","hello!");
+                return "test";
+            }
+       
+    }
+```       
+###总结：
+    *url更简洁
+    *参数更方便，框架负责自动的类型转换
+    *也可以约束访问参数
+    *GetMapping是一个组合注解，意义为： @RequestMapping(method =RequestMethod.GET)
+    *也可以用@GetMapping，@PostMapping，@PutMapping，@DeleteMapping，@PatchMapping
+                     
+                     
+                     
    
    
