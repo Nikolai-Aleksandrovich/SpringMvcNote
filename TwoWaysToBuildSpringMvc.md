@@ -1,9 +1,11 @@
 # SpringMvcNote
-this is a blog for spring mvc  
-###写在开头：maven存在资源过滤的问题，如何改正？
-   在pom.xml文件中使用如下配置将其配置完善  
-   可以将java下的*.properties,*.xml文件过滤   
-``` 
+this is a blog explain two ways to build a spring mvc frameWork  
+
+## maven存在资源过滤的问题，如何改正？
+
+   在pom.xml文件中使用如下配置将其配置完善,可以将java下的*.properties,*.xml文件过滤   
+
+``` xml
     <build>
        <resources>
            <resource>
@@ -26,49 +28,55 @@ this is a blog for spring mvc
     </build>
 ```
 
-###简要分析SpringMVC执行流程
-   
-   1.DispatcherServlet表示前置控制器，是整个SpringMVC的控制中心。用户发出请求，DispatcherServlet接收请求并拦截请求。
-   
-        *我们假设请求的url为 : http://localhost:8080/SpringMVC/hello
-   
-   
-        *如上url拆分成三部分，请求位于服务器localhost:8080上的SpringMVC站点的hello控制器。：
-   
-            *http://localhost:8080服务器域名
-   
-            *SpringMVC部署在服务器上的web站点
-   
-            *hello表示控制器  
-   2.HandlerMapping为处理器映射。DispatcherServlet调用HandlerMapping,HandlerMapping根据请求url查找Handler。
-   
-   3.HandlerExecution表示具体的Handler,其主要作用是根据url查找控制器，如上url被查找控制器为：hello。
-   
-   4.HandlerExecution将解析后的信息传递给DispatcherServlet,如解析控制器映射等。
-   
-   5.HandlerAdapter表示处理器适配器，其按照特定的规则去执行Handler。
-   
-   6.Handler让具体的Controller执行。
-   
-   7.Controller将具体的执行信息返回给HandlerAdapter,如ModelAndView。
-   
-   8.HandlerAdapter将视图逻辑名或模型传递给DispatcherServlet。
-   
-   9.DispatcherServlet调用视图解析器(ViewResolver)来解析HandlerAdapter传递的逻辑视图名。
-   
-   10.视图解析器将解析的逻辑视图名传给DispatcherServlet。
-   
-   11.DispatcherServlet根据视图解析器解析的视图结果，调用具体的视图。
-   
+## 简要分析SpringMVC执行流程
+
+   1.**<u>DispatcherServlet</u>**表示前置控制器，是整个SpringMVC的控制中心。用户发出请求，DispatcherServlet接收请求并拦截请求。
+
+​    假设请求的url为 : http://localhost:8080/SpringMVC/hello
+
+​	如上url拆分成三部分，请求位于服务器localhost:8080上的SpringMVC站点的hello控制器，其中：
+
+​       1.http://localhost:8080服务器域名
+
+​       2.SpringMVC部署在服务器上的web站点
+
+​       3.*hello表示控制器  
+
+   2.<u>**HandlerMapping**</u>为处理器映射。DispatcherServlet调用HandlerMapping,HandlerMapping根据请求url查找**Handler**。
+
+   3.**<u>HandlerExecution</u>**表示具体的Handler,其主要作用是根据url查找控制器，如上url被查找控制器为：hello。
+
+   4.HandlerExecution将<u>解析后的信息传递给DispatcherServlet</u>,如解析控制器映射等。
+
+   5.**<u>HandlerAdapter</u>**表示处理器适配器，其按照特定的规则去<u>执行Handler</u>。
+
+   6.Handler让具体的**Controller执行**。
+
+   7.**<u>Controller</u>**将具体的执行信息返回给**<u>HandlerAdapter</u>**,如ModelAndView。
+
+   8.**HandlerAdapter**将视图逻辑名或模型传递给**DispatcherServlet**。
+
+   9.DispatcherServlet调用视图解析器(**<u>ViewResolver</u>**)来解析HandlerAdapter传递的逻辑视图名。
+
+   10.**视图解析器**将解析的逻辑视图名传给**DispatcherServlet**。
+
+   11.**DispatcherServlet**根据视图解析器解析的视图结果，<u>调用具体的视图</u>。
+
    12.最终视图呈现给用户。  
-   
-###一、如何新建spring mvc？     
-1.新建一个maven Module ， springmvc-02-hello ， 添加web的支持     
-2.确定导入了SpringMVC 的依赖！  
-    *如何判断已经导入？  
-    1.在maven的Dependencies中springframework：spring-webmvc存在  
-    2.在ProjectStructure中的artifact的Output Layout中确认有lib   
-```
+
+## 一、如何新建spring mvc frameWork？     
+
+#### 1.新建一个maven Module， 添加web的支持     
+
+#### 2.确定导入了SpringMVC 的依赖
+
+​    如何判断已经导入？  
+
+#####     1.在maven的Dependencies中springframework：spring-webmvc存在  
+
+#####     2.在ProjectStructure中的artifact的Output Layout中确认有lib   
+
+```xml
     <dependencies>
        <dependency>
            <groupId>junit</groupId>
@@ -108,10 +116,10 @@ this is a blog for spring mvc
        </dependency>
     </dependencies>
 ```
-    
-    
-3.配置web.xml  ， 注册DispatcherServlet
-```
+
+#### 3.配置web.xml  ， 注册DispatcherServlet
+
+```xml
    <?xml version="1.0" encoding="UTF-8"?>
     <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -140,9 +148,11 @@ this is a blog for spring mvc
     
     </web-app>
 ```
-4.编写SpringMVC 的 配置文件！名称：springmvc-servlet.xml  : [servletname]-servlet.xml
-    说明，这里的名称要求是按照官方来的
-```    
+#### 4.编写SpringMVC 的 配置文件！名称：springmvc-servlet.xml  : [servletname]-servlet.xml
+
+​    说明，这里的名称要求是按照官方来的
+
+```    xml
     <?xml version="1.0" encoding="UTF-8"?>
     <beans xmlns="http://www.springframework.org/schema/beans"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -151,17 +161,19 @@ this is a blog for spring mvc
     
     </beans>
 ```
-5.添加 处理映射器 到 springmvc=servlet.xml的容器中 
-``` 
+#### 5.添加 处理映射器 到 springmvc=servlet.xml的容器中 
+
+``` xml
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 ```
-6.添加 处理器适配器 到 springmvc=servlet.xml的容器中   
-```
+#### 6.添加 处理器适配器 到 springmvc=servlet.xml的容器中   
+
+```xml
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
 ```
-7.添加 视图解析器 到 springmvc=servlet.xml的容器中   
-    //注意这里的前缀和后缀需要修改
-```   
+#### 7.添加 视图解析器 到 springmvc=servlet.xml的容器中   
+
+```   xml
     <!--视图解析器:DispatcherServlet给他的ModelAndView-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="InternalResourceViewResolver">
        <!--前缀-->
@@ -170,10 +182,10 @@ this is a blog for spring mvc
        <property name="suffix" value=".jsp"/>
     </bean>
 ```
-8.编写我们要操作业务Controller ，要么实现Controller接口，要么增加注解；需要返回一个ModelAndView，装数据，封视图；   
+#### 8.编写我们要操作业务Controller ，要么实现Controller接口，要么增加注解；需要返回一个ModelAndView，装数据，封视图；   
 
-   *我在src/main/java/com/huang/controller/HelloController下增加一个业务Controller：  
-```
+   在src/main/java/com/huang/controller/HelloController下增加一个业务Controller：  
+```java
     package com.huang.controller;
     
     import org.springframework.web.servlet.ModelAndView;
@@ -197,15 +209,17 @@ this is a blog for spring mvc
       }
        
     }
-``` 
-    
-9.将自己的类交给SpringIOC容器，注册bean   
 ```
+
+#### 9.将自己的类交给SpringIOC容器，注册bean   
+
+```xml
     <!--Handler-->
     <bean id="/hello" class="com.kuang.controller.HelloController"/>
 ```
-10.写要跳转的jsp页面，显示ModelandView存放的数据，以及我们的正常页面； 
-```   
+#### 10.写要跳转的jsp页面，显示ModelandView存放的数据，以及我们的正常页面； 
+
+```   jsp
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <html>
     <head>
@@ -215,22 +229,24 @@ this is a blog for spring mvc
     ${msg}
     </body>
     </html>
-```   
-11.配置Tomcat 启动测试！   
+```
+#### 11.配置Tomcat 启动测试！   
 
    在http://localhost:8080/hello 测试   
     
-###心得：当出现问题时不要慌，检查三个事情是不是没有做好：   
+心得：当出现问题时不要慌，检查三个事情是不是没有做好：   
 
     1.缺少jar包
     2.在IDEA项目发布添加lib依赖
     3.重启Tomcat    
 ***
-###二、如何用注解实现呢？  
-1.新建一个module，springmvc-03-hello-annotation 。添加web支持！  
+## 二、如何用注解实现呢？  
 
-2.同上，由于Maven可能存在资源过滤的问题，需将配置完善  
-```
+#### 1.新建一个module 。添加web支持！  
+
+#### 2.同上，由于Maven可能存在资源过滤的问题，需将配置完善  
+
+```xml
     <build>
        <resources>
            <resource>
@@ -252,10 +268,12 @@ this is a blog for spring mvc
        </resources>
     </build>
  
-``` 
-3.在pom.xml文件引入相关的依赖：主要有Spring框架核心库、Spring MVC、servlet , JSTL  
-4.配置web.xml  
-```     
+```
+#### 3.在pom.xml文件引入相关的依赖：主要有Spring框架核心库、Spring MVC、servlet , JSTL  
+
+#### 4.配置web.xml  
+
+```     xml
     <?xml version="1.0" encoding="UTF-8"?>
     <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -282,11 +300,13 @@ this is a blog for spring mvc
        </servlet-mapping>
     
     </web-app>
-``` 
-    注意：在<servlet-mapping><url-pattern>/</url-pattern></servlet-mapping>中的/不可换为/*，< url-pattern > / </ url-pattern > 不会匹配到.jsp， 只针对我们编写的请求；即：.jsp 不会进入spring的 DispatcherServlet类 。< url-pattern > /* </ url-pattern > 会匹配 *.jsp，会出现返回 jsp视图 时再次进入spring的DispatcherServlet 类，导致找不到对应的controller所以报404错。  
-5.  添加Spring MVC配置文件   
-    在resource目录下添加springmvc-servlet.xml配置文件，配置的形式与Spring容器配置基本类似，为了支持基于注解的IOC，设置了自动扫描包的功能，具体配置信息如下：
 ```
+注意：在<servlet-mapping><url-pattern>/</url-pattern></servlet-mapping>中的/不可换为/**，< url-pattern > / </ url-pattern > 不会匹配到.jsp， 只针对我们编写的请求；即：.jsp 不会进入spring的 DispatcherServlet类 。< url-pattern > /* *</ url-pattern > 会匹配 *.jsp，会出现返回 jsp视图 时再次进入spring的DispatcherServlet 类，导致找不到对应的controller所以报404错。  
+
+5.  #### 添加Spring MVC配置文件   
+    
+    在resource目录下添加springmvc-servlet.xml配置文件，配置的形式与Spring容器配置基本类似，为了支持基于注解的IOC，设置了自动扫描包的功能，具体配置信息如下：
+```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <beans xmlns="http://www.springframework.org/schema/beans"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -324,11 +344,14 @@ this is a blog for spring mvc
        </bean>
     
     </beans>
-```          
+```
    在视图解析器中我们把所有的视图都存放在/WEB-INF/目录下，这样可以保证视图安全，因为这个目录下的文件，客户端不能直接访问。  
-6.创建Controller   
-    编写一个Java控制类：com.huang.controller.HelloController
-```   
+
+#### 6.创建Controller   
+
+​    编写一个Java控制类：com.huang.controller.HelloController
+
+```   java
     package com.huang.controller;
     
     import org.springframework.stereotype.Controller;
@@ -349,10 +372,12 @@ this is a blog for spring mvc
            return "hello";//方法返回的结果是视图的名称hello，加上配置文件中的前后缀变成WEB-INF/jsp/hello.jsp。
       }
     }
-```           
-7.创建视图层  
-    在WEB-INF/ jsp目录中创建hello.jsp ， 视图可以直接取出并展示从Controller带回的信息；可以通过EL表示取出Model中存放的值，或者对象；
-``` 
+```
+#### 7.创建视图层  
+
+​    在WEB-INF/ jsp目录中创建hello.jsp ， 视图可以直接取出并展示从Controller带回的信息；可以通过EL表示取出Model中存放的值，或者对象；
+
+``` jsp
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <html>
     <head>
@@ -362,9 +387,11 @@ this is a blog for spring mvc
     ${msg}
     </body>
     </html>
-```     
-8.配置Tomcat运行  
-###总结  
+```
+#### 8.配置Tomcat运行  
+
+## 总结  
+
 具体步骤总结：  
     1.新建一个web项目  
     2.导入相关jar包  
@@ -373,6 +400,8 @@ this is a blog for spring mvc
     5.接下来就是去创建对应的控制类 , controller  
     6.最后完善前端视图和controller之间的对应  
     7.测试运行调试.    
-###使用springMVC必须配置的三大件：  
+
+## 使用springMVC必须配置的三大件：  
+
    处理器映射器、处理器适配器、视图解析器  
    通常，我们只需要手动配置视图解析器，而处理器映射器和处理器适配器只需要开启注解驱动即可，而省去了大段的xml配置
