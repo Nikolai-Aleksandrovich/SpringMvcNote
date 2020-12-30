@@ -30,19 +30,16 @@ this is a blog for spring mvc
    
    1.DispatcherServlet表示前置控制器，是整个SpringMVC的控制中心。用户发出请求，DispatcherServlet接收请求并拦截请求。
    
-   我们假设请求的url为 : http://localhost:8080/SpringMVC/hello
+        *我们假设请求的url为 : http://localhost:8080/SpringMVC/hello
    
    
-   如上url拆分成三部分：
+        *如上url拆分成三部分，请求位于服务器localhost:8080上的SpringMVC站点的hello控制器。：
    
-   http://localhost:8080服务器域名
+            *http://localhost:8080服务器域名
    
-   SpringMVC部署在服务器上的web站点
+            *SpringMVC部署在服务器上的web站点
    
-   hello表示控制器
-   
-   通过分析，如上url表示为：请求位于服务器localhost:8080上的SpringMVC站点的hello控制器。
-   
+            *hello表示控制器  
    2.HandlerMapping为处理器映射。DispatcherServlet调用HandlerMapping,HandlerMapping根据请求url查找Handler。
    
    3.HandlerExecution表示具体的Handler,其主要作用是根据url查找控制器，如上url被查找控制器为：hello。
@@ -68,9 +65,9 @@ this is a blog for spring mvc
 ###一、如何新建spring mvc？     
 1.新建一个maven Module ， springmvc-02-hello ， 添加web的支持     
 2.确定导入了SpringMVC 的依赖！  
-    如何判断已经导入？
-    1.在maven的Dependencies中springframework：spring-webmvc存在
-    2.在ProjectStructure中的artifact的Output Layout中确认有lib 
+    *如何判断已经导入？  
+    1.在maven的Dependencies中springframework：spring-webmvc存在  
+    2.在ProjectStructure中的artifact的Output Layout中确认有lib   
 ```
     <dependencies>
        <dependency>
@@ -175,7 +172,7 @@ this is a blog for spring mvc
 ```
 8.编写我们要操作业务Controller ，要么实现Controller接口，要么增加注解；需要返回一个ModelAndView，装数据，封视图；   
 
-   我在src/main/java/com/huang/controller/HelloController下增加一个业务Controller：  
+   *我在src/main/java/com/huang/controller/HelloController下增加一个业务Controller：  
 ```
     package com.huang.controller;
     
@@ -369,13 +366,13 @@ this is a blog for spring mvc
 8.配置Tomcat运行  
 ###总结  
 具体步骤总结：  
-1.新建一个web项目
-2.导入相关jar包
-3.编写web.xml , 注册DispatcherServlet
-4.编写springmvc配置文件
-5.接下来就是去创建对应的控制类 , controller
-6.最后完善前端视图和controller之间的对应
-7.测试运行调试.  
+    1.新建一个web项目  
+    2.导入相关jar包  
+    3.编写web.xml , 注册DispatcherServlet  
+    4.编写springmvc配置文件  
+    5.接下来就是去创建对应的控制类 , controller  
+    6.最后完善前端视图和controller之间的对应  
+    7.测试运行调试.    
 ###使用springMVC必须配置的三大件：  
    处理器映射器、处理器适配器、视图解析器  
    通常，我们只需要手动配置视图解析器，而处理器映射器和处理器适配器只需要开启注解驱动即可，而省去了大段的xml配置
